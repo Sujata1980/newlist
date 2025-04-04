@@ -1,23 +1,31 @@
 import logo from './logo.svg';
+import React,{ useState} from 'react';
 import './App.css';
 
 function App() {
+  const [name,setName] = useState('');
+  const [list,setList] = useState([]);
+
+  const handleClick = () => {
+      setList((preVal)=>{
+        return [...preVal,name];
+      })
+      setName('')
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TO-DO-LIST</h1>
+      <input type="text" placeholder="Add your todo" value={name} onChange={(e)=> setName(e.target.value)}/>
+      <button onClick= {handleClick}>+</button>
+      {
+        list.map((item,id)=>{
+          return(
+            <li>
+            {item}
+            </li>
+          )
+        })
+      }
     </div>
   );
 }
