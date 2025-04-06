@@ -12,6 +12,18 @@ function App() {
       })
       setName('')
   }
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are You Sure You Want to delete this")){
+    console.log(id)
+    // alert(id)
+    const nList = [...list]
+    const filter =nList.filter((val,i)=>{
+      return id !== i
+    })
+
+    setList(filter);
+  }}
   return (
     <div className="App">
       <h1>TO-DO-LIST</h1>
@@ -20,8 +32,9 @@ function App() {
       {
         list.map((item,id)=>{
           return(
-            <li>
+            <li key={id}>
             {item}
+            <button onClick={()=>handleDelete(id)}>-</button>
             </li>
           )
         })
